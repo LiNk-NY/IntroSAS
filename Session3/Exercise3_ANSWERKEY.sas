@@ -1,18 +1,18 @@
-libname duck "E:/SAS/"; 
-run;
+LIBNAME duck "E:/SAS/Data"; 
+RUN;
 
-data mydata; 
-set duck.classds; 
-run; 
+DATA work.mydata; 
+SET duck.classds; 
+RUN; 
 
 title1 "SAS Exercise 3 Marcel Ramos";
 title2 "Introduction to SAS"
 footnote1 "Used with permission"; 
 
-proc print data = mydata label noobs n;
-var age fakedob race gender condition; 
-id uniqueid; 
-run; 
+PROC PRINT data = work.mydata label noobs n;
+VAR age fakedob race gender condition; 
+ID uniqueid; 
+RUN; 
 
 title2 ; 
 footnote1 ;

@@ -1,36 +1,36 @@
-libname ref "E:\Windows\Documents\GitHub\IntroSAS\datasets"; run; 
+LIBNAME ref "E:\Windows\Documents\GitHub\IntroSAS\datasets"; run; 
 
-proc contents data = ref.classds; 
-run; 
+PROC CONTENTS DATA = ref.classds; 
+RUN; 
 
-data new1;
-set ref.classds (keep = uniqueid age borough location pob 
+DATA new1;
+SET ref.classds (keep = uniqueid age borough location pob 
 uhf zip boro_char); 
-run; 
+RUN; 
 
-proc contents data = new1; 
-run; 
+PROC CONTENTS DATA = new1; 
+RUN; 
 
-data new2; 
-set ref.classds (keep = uniqueid condition dob_char fakedob 
+DATA new2; 
+SET ref.classds (keep = uniqueid condition dob_char fakedob 
 gender race surveydate);
-run; 
+RUN; 
 
-proc sort data = new1 nodups; 
-by uniqueid; 
-run;
+PROC SORT DATA = new1 nodups; 
+BY uniqueid; 
+RUN;
 
-proc sort data = new2 nodup; 
-by uniqueid; 
-run; 
+PROC SORT DATA = new2 nodup; 
+BY uniqueid; 
+RUN; 
 
-data mynewdata; 
-merge new1 new2; 
-by uniqueid; 
-run;
+DATA mynewdata; 
+MERGE new1 new2; 
+BY uniqueid; 
+RUN;
 
-proc print data = mynewdata (obs = 10); 
-run; 
+PROC PRINT DATA = mynewdata (obs = 10); 
+RUN; 
 
-proc contents data = mynewdata; 
-run; 
+PROC CONTENTS DATA = mynewdata; 
+RUN; 

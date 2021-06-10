@@ -1,23 +1,23 @@
-libname duck "E:/SAS/"; 
-run; 
+LIBNAME duck "E:/SAS/"; 
+RUN; 
 
-data females; 
-set duck.classds; 
-where gender = 2; 
+DATA work.females; 
+SET duck.classds; 
+WHERE gender = 2; 
 newID = catx (' . ', pob, uniqueid);
 newID2 = compress(newID); 
-run; 
+RUN; 
 
-proc print data = females (obs = 10); 
-var newID2; 
-run; 
+PROC PRINT DATA = females (obs = 10); 
+VAR newID2; 
+RUN; 
 
-proc sort data = females; 
-by condition; 
-run; 
+PROC SORT DATA = females; 
+BY condition; 
+RUN; 
 
-proc means data = females n min max range mean stddev missing maxdec=3; 
-var age; 
-by condition; 
-run; 
+PROC MEANS DATA = females n min max range mean stddev missing maxdec=3; 
+VAR age; 
+BY condition; 
+RUN; 
 

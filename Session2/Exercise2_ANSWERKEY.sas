@@ -1,25 +1,28 @@
-libname duck 'E:/SAS'; 
-run;
+LIBNAME duck 'E:/SAS/Data'; 
 
-proc print data = duck.classds (obs = 10); 
-var race gender age borough;
-run;
+* optional ; 
+PROC PRINT data = duck.classds (obs = 10); 
+VAR race gender age borough;
+RUN;
 
-data males; 
-set duck.classds (keep = gender race age borough); 
-where gender = 1; 	
-if race eq 1 then ethnicity = 'hispanic';
-else if race eq 2 then ethnicity = 'white' ;
-else if race eq 3 then ethnicity = 'black' ; 
-else if race eq 4 then ethnicity = 'asian'; 
-else if race eq 5 then ethnicity = 'other';
-else if race eq 99 then ethnicity = 'unknown'; 
-run; 
+/* In one data step */
+DATA work.males; 
+SET duck.classds (keep = gender race age borough); 
 
-proc contents data = males;
-run; 
+if race = 1 then ethnicity = 'hispanic';
+else if race = 2 then ethnicity = 'white' ;
+else if race = 3 then ethnicity = 'black' ; 
+else if race = 4 then ethnicity = 'asian'; 
+else if race = 5 then ethnicity = 'other';
+else if race = 99 then ethnicity = 'unknown'; 
 
-data refs.males; 
-set work.males; 
-run; 
+WHERE gender = 1; 	
+RUN; 
+
+PROC CONTENTS data = males;
+RUN; 
+
+DATA duck.males; 
+SET work.males; 
+RUN; 
 
