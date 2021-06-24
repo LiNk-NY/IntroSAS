@@ -2,10 +2,14 @@ LIBNAME ref 'E:/SAS/';
 
 FILENAME formatin 'E:/SAS/formatstatements_chs2011_public.sas';
 
+/* Load formats and make them available in the work library */
 %include          'E:/SAS/formats_chs2011_public.sas';
 
+/* Load dataset and apply formats from work library */
 DATA work.chs11;
   SET ref.chs2011_public;
+  /* optionally use the format statement */
+  %include formatin;
 RUN;
 
 PROC CONTENTS data = chs11; 
