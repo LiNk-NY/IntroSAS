@@ -1,53 +1,54 @@
 *Code for Exercise 4;
 
-libname ref "C:\Users\User\Desktop\SAS\";
+LIBNAME ref "C:\Users\User\Desktop\SAS\";
 
 *make a new temporary data set that is limited to males;
-data males;
-set ref.classds;
-where gender =1;
-run;
+DATA work.males;
+SET ref.classds;
+WHERE gender =1;
+RUN;
 
 *check contents of new data set;
-proc contents data = males;
-run;
+PROC CONTENTS DATA = work.males;
+RUN;
 
-Title1 "Results Table Marcel Ramos";
+title1 "Results Table Marcel Ramos";
 
 *create formats for race and borough;
-proc format;
+PROC FORMAT;
 
-value frace
-1= '1 = Hispanic'
-2= '2 = white'
-3= '3 = black'
-4= '4 = Asian'
-5= '5 = other'
-99= '99 = unknown';
-
-value fborough
-1 = '1 = Bronx'
-2= '2 = Brooklyn'
-3= '3 = Manhattan'
-4= '4 = Queens'
-5= '5 = Staten Island'
-99= '99 = unknown'
+VALUE frace
+  1= '1 = Hispanic'
+  2= '2 = white'
+  3= '3 = black'
+  4= '4 = Asian'
+  5= '5 = other'
+  99= '99 = unknown'
 ;
-run;
+
+VALUE fborough
+  1 = '1 = Bronx'
+  2= '2 = Brooklyn'
+  3= '3 = Manhattan'
+  4= '4 = Queens'
+  5= '5 = Staten Island'
+  99= '99 = unknown'
+;
+RUN;
 
 *Send output to Excel via ODS;
-ods html file= 'C:\Users\User\Desktop\SAS\Exercises\mytable.xls'; *change path to be where you want Excel file to show up;
+ODS HTML file= 'C:\Users\User\Desktop\SAS\Exercises\mytable.xls'; *change path to be where you want Excel file to show up;
 
-ods no results; *suppress "results" text in Excel;
+ODS no results; *suppress "results" text in Excel;
 
-proc freq data = males;
-tables race * borough;
-format race frace. borough fborough.;
-run;
+PROC FREQ DATA = work.males;
+TABLES race * borough;
+FORMAT race frace. borough fborough.;
+RUN;
 
-ods html close;
+ODS HTML close;
 
 *Reopen SAS ODS; 
-ods HTML; 
+ODS HTML; 
 
 

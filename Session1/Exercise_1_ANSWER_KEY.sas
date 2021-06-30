@@ -17,18 +17,18 @@
 
 Bring the permanent classds data set with you to the next class.
 ;
+/* modify to your file path */
+LIBNAME classone 'C:\Users\User\Documents\';
 
-libname classone 'C:\Users\User\Documents\'; * modify to your file path;
-
-proc contents data = classone.classds; 
-run; 
+PROC CONTENTS data = classone.classds; 
+RUN; 
 
 
 /* Optional */
 DATA work.temp; 
-set classone.classds;
-run; 
+SET classone.classds;
+RUN; 
 
-proc contents data = temp; 
-run; 
+PROC CONTENTS data = temp; 
+RUN; 
 
